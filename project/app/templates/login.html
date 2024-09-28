@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body align="center">
+    <h1>-----login Page----</h1>
+    {{msg}}
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+    
+    <label for="">Email</label>
+    <input type="email" name="email"> <br> <br>
+    
+    <label for="">Password</label>
+    <input type="password" name="password"> <br> <br>
+    <button>login</button>
+     {% comment %} <div class="alert alert-success">
+        <strong>Success!</strong> <h1>{{msg}}</h1>
+      </div>  {% endcomment %}
+    
+
+    </form>
+    
+</body>
+</html>
