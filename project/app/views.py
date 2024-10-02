@@ -80,29 +80,46 @@ def login(request):
         return render(request,'login.html')
     
     
-def first(request):
-    data=Student.objects.first()
-    print(data)
-    return HttpResponse(data)
+# def first(request):
+#     data=Student.objects.first()
+#     print(data)
+#     return HttpResponse(data)
     
-def last(request):
-    data=Student.objects.last()
-    print(data)
-    return HttpResponse(data)
+# def last(request):
+#     data=Student.objects.last()
+#     print(data)
+#     return HttpResponse(data)
     
-def latest(request):
-    data=Student.objects.latest('id')
-    print(data)
-    return HttpResponse(data)
+# def latest(request):
+#     data=Student.objects.latest('id')
+#     print(data)
+#     return HttpResponse(data)
     
-def earliest(request):
-    data=Student.objects.earliest('id')
-    print(data)
-    return HttpResponse(data)
+# def earliest(request):
+#     data=Student.objects.earliest('id')
+#     print(data)
+#     return HttpResponse(data)
 
-def exists(request):
-    data=Student.objects.all()
-    print(data)
+# def exists(request):
+#     data=Student.objects.all()
+#     print(data)
+#     return HttpResponse(data)
+
+# def update(request):
+#     data=Student.objects.filter(stu_email="akku@gmail.com").update(stu_name='Akku')
+
+#     print(data)
+#     return HttpResponse(data)
+
+def all_details(request):
+    data=Student.objects.all().values_list('stu_name','stu_email')
+    print(data.values_list())
+    return HttpResponse(data)
+    # return render(request,'dashboard.html')
+   
+def filter(request):
+    data=Student.objects.filter(stu_name="Akansha Bagde")
+    print(data.values)
     return HttpResponse(data)
 
 def dashboard(request):

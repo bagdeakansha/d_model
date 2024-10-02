@@ -7,11 +7,13 @@
 </head>
 <body>
     {{data.name}}
-    <a href="{% url 'first' %}">First</a>
+    {% comment %} <a href="{% url 'first' %}">First</a>
      <a href="{% url 'last' %}">last</a> 
      <a href="{% url 'latest' %}">latest</a>
      <a href="{% url 'earliest' %}">earliest</a> 
-     <a href="{% url 'exists' %}">exists</a> 
+     <a href="{% url 'exists' %}">exists</a>  {% endcomment %}
+     <a href="{% url 'all_details' %}">details</a> 
+     <a href="{% url 'filter' %}">filter</a> 
     
 </body>
 </html>
