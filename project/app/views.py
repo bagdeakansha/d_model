@@ -78,8 +78,12 @@ def login(request):
     else:
         
         return render(request,'login.html')
+
+def dashboard(request):
+    return render(request,'dashboard.html')
+
     
-    
+#single value returm-----------------------    
 # def first(request):
 #     data=Student.objects.first()
 #     print(data)
@@ -111,19 +115,46 @@ def login(request):
 #     print(data)
 #     return HttpResponse(data)
 
+#----------------------------------------------------------------------------------
+#multiple object return----------------
 def all_details(request):
-    data=Student.objects.all().values_list('stu_name','stu_email')
+    data=Student.objects.all().values_list('stu_name','stu_email','stu_contact','stu_password')
     print(data.values_list())
     return HttpResponse(data)
-    # return render(request,'dashboard.html')
    
 def filter(request):
     data=Student.objects.filter(stu_name="Akansha Bagde")
     print(data.values)
     return HttpResponse(data)
 
-def dashboard(request):
-    return render(request,'dashboard.html')
+def exclude(request):
+    data=Student.objects.exclude(stu_email="akanshabagde01@gmail.com")
+    print(data.values)
+    return HttpResponse(data)
+
+def acending(request):
+    data=Student.objects.order_by('stu_name') #ascending
+    data=Student.objects.order_by('stu_name').reverse()
+    print(data.values)
+    return HttpResponse(data)
+
+def descending(request):
+    data=Student.objects.order_by('-stu_name') #descending
+    print(data.values)
+    return HttpResponse(data)
+
+def random(request):
+    data=Student.objects.order_by('?') #random
+    print(data.values)
+    return HttpResponse(data)
+
+def slice(request):
+    data=Student.objects.all().reverse()
+    # data = Student.objects.all().order_by('-id')[:4] 
+    print(data)
+    return HttpResponse(data)
+
+
     
 
     

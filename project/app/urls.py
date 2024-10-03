@@ -14,4 +14,9 @@ urlpatterns = [
     # path('exists/',views.exists,name="exists"),
     path('all_details/',views.all_details,name="all_details"),
     path('filter/',views.filter,name="filter"),
+    path('exclude/',views.exclude,name="exclude"),
+    path('ascending/',views.acending,name="ascending"),
+    path('descending/',views.descending,name="descending"),
+    path('random/',views.random,name="random"),
+    path('slice/',views.slice,name="slice"),
 ]
