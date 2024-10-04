@@ -6,16 +6,57 @@
     <title>Document</title>
 </head>
 <body>
-    {{data.name}}
+    
     {% comment %} <a href="{% url 'first' %}">First</a>
      <a href="{% url 'last' %}">last</a> 
      <a href="{% url 'latest' %}">latest</a>
      <a href="{% url 'earliest' %}">earliest</a> 
      <a href="{% url 'exists' %}">exists</a>  {% endcomment %}
-     <a href="{% url 'all_details' %}">details</a> 
+     {% comment %} <a href="{% url 'all_details' %}">details</a> 
      <a href="{% url 'filter' %}">filter</a> 
      <a href="{% url 'exclude' %}">Exclude</a> 
-     <a href="{% url 'order' %}">order</a> 
+     <a href="{% url 'order' %}">order</a>  {% endcomment %}
+
+     <!-- <h1>{{data}} </h1> -->
+      <form action="{% url 'query' %}" method="post">
+        {% csrf_token %}
+        <h2>-----QUERY FORM------</h2>
+     
+        Name : <input type="text" value={{data.name}} disabled> <br> <br>
+        Email : <input type="email" value={{data.email}} disabled> <br> <br>
+        Query : <input type="text"> <br> <br>
+        <button>Query</button>
+
+      </form>
+     
+
+        <div style="margin-top: -210px;">
+            <h2 align="center">----QUERY DATA-----</h2>
+        <table border="1" align="center" >
+            <tr>
+                <th>SNO</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+
+        </div>
+         
+        
+
+     
+
+     
+
+     
+    
+
      
 
     

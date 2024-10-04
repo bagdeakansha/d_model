@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Student
+from .models import Query
 
 # Create your views here.
 def home(request):
@@ -117,43 +118,51 @@ def dashboard(request):
 
 #----------------------------------------------------------------------------------
 #multiple object return----------------
-def all_details(request):
-    data=Student.objects.all().values_list('stu_name','stu_email','stu_contact','stu_password')
-    print(data.values_list())
-    return HttpResponse(data)
+# def all_details(request):
+#     data=Student.objects.all().values_list('stu_name','stu_email','stu_contact','stu_password')
+#     print(data.values_list())
+#     return HttpResponse(data)
    
-def filter(request):
-    data=Student.objects.filter(stu_name="Akansha Bagde")
-    print(data.values)
-    return HttpResponse(data)
+# def filter(request):
+#     data=Student.objects.filter(stu_name="Akansha Bagde")
+#     print(data.values)
+#     return HttpResponse(data)
 
-def exclude(request):
-    data=Student.objects.exclude(stu_email="akanshabagde01@gmail.com")
-    print(data.values)
-    return HttpResponse(data)
+# def exclude(request):
+#     data=Student.objects.exclude(stu_email="akanshabagde01@gmail.com")
+#     print(data.values)
+#     return HttpResponse(data)
 
-def acending(request):
-    data=Student.objects.order_by('stu_name') #ascending
-    data=Student.objects.order_by('stu_name').reverse()
-    print(data.values)
-    return HttpResponse(data)
+# def acending(request):
+#     data=Student.objects.order_by('stu_name') #ascending
+#     data=Student.objects.order_by('stu_name').reverse()
+#     print(data.values)
+#     return HttpResponse(data)
 
-def descending(request):
-    data=Student.objects.order_by('-stu_name') #descending
-    print(data.values)
-    return HttpResponse(data)
+# def descending(request):
+#     data=Student.objects.order_by('-stu_name') #descending
+#     print(data.values)
+#     return HttpResponse(data)
 
-def random(request):
-    data=Student.objects.order_by('?') #random
-    print(data.values)
-    return HttpResponse(data)
+# def random(request):
+#     data=Student.objects.order_by('?') #random
+#     print(data.values)
+#     return HttpResponse(data)
 
-def slice(request):
-    data=Student.objects.all().reverse()
-    # data = Student.objects.all().order_by('-id')[:4] 
-    print(data)
-    return HttpResponse(data)
+# def slice(request):
+#     data=Student.objects.all().reverse()
+#     # data = Student.objects.all().order_by('-id')[:4] 
+#     print(data)
+#     return HttpResponse(data)
 
+def query(request):
+    if request.method=='POST':
+        name1=request.POST.get('name')
+        email1=request.POST.get('email')
+        query1=request.POST.get('query')
+        query.objects.create(name=name1,email=email1,query=query1)
+        data=Student.objects.get(stu_email=email1)
+        return render(request,'dashboard.html',{'data':data})
 
     
 
