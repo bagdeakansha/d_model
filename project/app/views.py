@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Student
 from .models import Query
 
+
 # Create your views here.
 def home(request):
     return render(request,'home.html')
@@ -19,6 +20,7 @@ def register(request):
         if password==c_password:
             Student.objects.create(stu_name=name,stu_email=email,stu_contact=contact,stu_password=password)
             user=Student.objects.filter(stu_email=email)
+            
             print(user)
             if user:
                 
@@ -160,9 +162,20 @@ def query(request):
         name1=request.POST.get('name')
         email1=request.POST.get('email')
         query1=request.POST.get('query')
-        query.objects.create(name=name1,email=email1,query=query1)
+        Query.objects.create(stu_name=name1,stu_email=email1,stu_query=query1)
         data=Student.objects.get(stu_email=email1)
-        return render(request,'dashboard.html',{'data':data})
+        print(data)
+        data1={
+            'name':data.stu_name,
+            'email':data.stu_email,
+            'contact':data.stu_contact,
+            'password':data.stu_password
+        }
+        query_data=Query.objects.filter(stu_email=email1)
+        return render(request,'dashboard.html',{'data1':data1,'query_data':query_data})
+    
+        # return render(request,'dashboard.html',{'data':data})
+
 
     
 

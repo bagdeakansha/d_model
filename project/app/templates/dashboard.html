@@ -17,17 +17,17 @@
      <a href="{% url 'exclude' %}">Exclude</a> 
      <a href="{% url 'order' %}">order</a>  {% endcomment %}
 
-     <!-- <h1>{{data}} </h1> -->
-      <form action="{% url 'query' %}" method="post">
+     <h1>{{data}} </h1>
+       <form action="{% url 'query' %}" method="post"> 
         {% csrf_token %}
         <h2>-----QUERY FORM------</h2>
      
-        Name : <input type="text" value={{data.name}} disabled> <br> <br>
-        Email : <input type="email" value={{data.email}} disabled> <br> <br>
-        Query : <input type="text"> <br> <br>
+        Name : <input type="text" name="name" value={{data.name}} readonly> <br> <br>
+        Email : <input type="email" name="email" value={{data.email}} readonly> <br> <br>
+        Query : <input type="text" name="query"> <br> <br>
         <button>Query</button>
 
-      </form>
+      </form> 
      
 
         <div style="margin-top: -210px;">
@@ -42,7 +42,7 @@
                 <th>Delete</th>
             </tr>
             <tr>
-                <td></td>
+                <td>{{query_data}}</td>
             </tr>
         </table>
 
