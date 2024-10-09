@@ -165,16 +165,57 @@ def query(request):
         Query.objects.create(stu_name=name1,stu_email=email1,stu_query=query1)
         data=Student.objects.get(stu_email=email1)
         print(data)
-        data1={
+        data={
             'name':data.stu_name,
             'email':data.stu_email,
             'contact':data.stu_contact,
             'password':data.stu_password
         }
         query_data=Query.objects.filter(stu_email=email1)
-        return render(request,'dashboard.html',{'data1':data1,'query_data':query_data})
+        return render(request,'dashboard.html',{'data':data,'query_data':query_data})
     
         # return render(request,'dashboard.html',{'data':data})
+
+
+def edit(request,x):
+    userdata=Query.objects.get(id=x)
+    email=userdata.stu_email
+    name=userdata.stu_name
+    query=userdata.stu_query
+    userdata.save()
+    print(name,email,query)
+    data=Student.objects.get(stu_email=email)
+    query_data=Query.objects.filter(stu_email=email)
+    edit_details={
+        'name1':name,
+        'email1':email,
+        'query1':query
+    }
+    # userdata.stu_name=name,
+    # userdata.stu_email=email,
+    # userdata.stu_query=query
+    # userdata.save()
+    return render(request,'dashboard.html',{'edit':edit_details,'data':data,'query_data':query_data,'user':userdata})
+
+def delete(request,x):
+    userdata = Query.objects.get(id=x)
+    email = userdata.stu_email
+    userdata.delete()
+    data = Student.objects.get(stu_email=email)
+    name = data.stu_name
+    email = data.stu_email
+    contact = data.stu_contact
+    password = data.stu_password
+    user={
+        'name':name,
+        'email':email,
+        'contact':contact,
+        'password':password,
+    }
+    query_data=Query.objects.filter(stu_email=email)
+    return render(request,'dashboard.html',{'query_data':query_data,'user':user,'data':data})
+
+
 
 
     

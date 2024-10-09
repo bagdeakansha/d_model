@@ -18,32 +18,55 @@
      <a href="{% url 'order' %}">order</a>  {% endcomment %}
 
      <h1>{{data}} </h1>
-       <form action="{% url 'query' %}" method="post"> 
-        {% csrf_token %}
+        
+        
         <h2>-----QUERY FORM------</h2>
-     
-        Name : <input type="text" name="name" value={{data.name}} readonly> <br> <br>
-        Email : <input type="email" name="email" value={{data.email}} readonly> <br> <br>
-        Query : <input type="text" name="query"> <br> <br>
+     {% if edit %}
+        <form action="{% url 'edit' x=data.id %}" method="post">
+        {% csrf_token %}
+        Name : <input type="text" name="name" value={{data.name}} readonly  style="background-color: transparent; border: 1px solid grey; border-radius:10px"> <br> <br>
+        Email : <input type="email" name="email" value={{data.email}} readonly style="background-color: transparent; border: 1px solid grey; border-radius:10px"> <br> <br>
+        Query : <input type="text" name="query" placeholder=" Enter your query" style="background-color: transparent; border: 1px solid grey; border-radius:10px"> <br> <br>
+        <button>Edit</button>
+        </form> 
+    {% else %}
+        <form action="{% url 'query' %}" method="post">
+        {% csrf_token %}
+        Name : <input type="text" name="name" value={{data.name}} readonly  style="background-color: transparent; border: 1px solid grey; border-radius:10px"> <br> <br>
+        Email : <input type="email" name="email" value={{data.email}} readonly style="background-color: transparent; border: 1px solid grey; border-radius:10px"> <br> <br>
+        Query : <input type="text" name="query" placeholder=" Enter your query" style="background-color: transparent; border: 1px solid grey; border-radius:10px"> <br> <br>
         <button>Query</button>
+        </form> 
+    {% endif %}
 
-      </form> 
+      
      
 
         <div style="margin-top: -210px;">
             <h2 align="center">----QUERY DATA-----</h2>
-        <table border="1" align="center" >
+        <table border="1" align="center" style="background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;">
             <tr>
                 <th>SNO</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Contact</th>
+                
+                <th>Query</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
+            <tbody>
+        {% for i in query_data %}
             <tr>
-                <td>{{query_data}}</td>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.stu_name }}</td>
+                <td>{{ i.stu_email }}</td>
+                <td>{{ i.stu_query }}</td>
+                <td><a href="{% url 'edit' x=i.id %}" style="   text-decoration: none; color: green;">Edit</a></td>
+                <td><a href="{% url 'delete' x=i.id %}"style="  text-decoration: none; color: red;">Delete</a></td>
+                
             </tr>
+        {% endfor %}
+    </tbody>
         </table>
 
         </div>
