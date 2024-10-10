@@ -17,18 +17,19 @@
      <a href="{% url 'exclude' %}">Exclude</a> 
      <a href="{% url 'order' %}">order</a>  {% endcomment %}
 
-     <h1>{{data}} </h1>
+     <h1>{{userdata}} </h1>
         
         
         <h2>-----QUERY FORM------</h2>
      {% if edit %}
-        <form action="{% url 'edit' x=data.id %}" method="post">
+        <form action="{% url 'edit' x=userdata.id %}" method="post">
         {% csrf_token %}
-        Name : <input type="text" name="name" value={{data.name}} readonly  style="background-color: transparent; border: 1px solid grey; border-radius:10px"> <br> <br>
-        Email : <input type="email" name="email" value={{data.email}} readonly style="background-color: transparent; border: 1px solid grey; border-radius:10px"> <br> <br>
-        Query : <input type="text" name="query" placeholder=" Enter your query" style="background-color: transparent; border: 1px solid grey; border-radius:10px"> <br> <br>
-        <button>Edit</button>
+        Name : <input type="text" name="name" value="{{userdata.stu_name}}" readonly  style="background-color: transparent; border: 1px solid grey; border-radius:10px"> <br> <br>
+        Email : <input type="email" name="email" value="{{userdata.stu_email}}" readonly style="background-color: transparent; border: 1px solid grey; border-radius:10px"> <br> <br>
+        Query : <input type="text" name="query"value="{{userdata.stu_query}}" placeholder=" Enter your query" style="background-color: transparent; border: 1px solid grey; border-radius:10px"> <br> <br>
+        <button>Update</button>
         </form> 
+        
     {% else %}
         <form action="{% url 'query' %}" method="post">
         {% csrf_token %}
@@ -44,7 +45,7 @@
 
         <div style="margin-top: -210px;">
             <h2 align="center">----QUERY DATA-----</h2>
-        <table border="1" align="center" style="background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;">
+        <table border="1" align="center" style="background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;width:800px;">
             <tr>
                 <th>SNO</th>
                 <th>Name</th>
